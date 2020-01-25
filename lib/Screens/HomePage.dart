@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:whatsapp_redesign/Screens/MessagesCards.dart';
+import 'package:whatsapp_redesign/Services/Authentication.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -11,6 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final Authentication _auth = new Authentication() ;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -45,10 +48,12 @@ class _HomePageState extends State<HomePage> {
             iconSize: 30.0,
           ),
           new IconButton(
-            onPressed: () {},
+            onPressed: () async {
+             await _auth.signOut();
+            },
             color: Colors.white,
             iconSize: 30.0,
-            icon: new Icon(Icons.more_vert),
+            icon: new Icon(Icons.exit_to_app),
           )
         ],
       ),
