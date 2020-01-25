@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "718035118451",
+    "firebase_url": "https://whatsapp-redesign-d9359.firebaseio.com",
+    "project_id": "whatsapp-redesign-d9359",
+    "storage_bucket": "whatsapp-redesign-d9359.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718035118451:android:a1c2cf48d61b9e7dea7d06",
+        "android_client_info": {
+          "package_name": "com.example.whatsapp_redesign"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718035118451-8s2868ji77p6gc9k49obs2glv9p731qq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq1begi_D9Tj9dRbqBY1K4OhStNtn2yDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718035118451-8s2868ji77p6gc9k49obs2glv9p731qq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
