@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_redesign/Screens/SignUp/Signup.dart';
 import 'package:whatsapp_redesign/Services/Authentication.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   Authentication _authentication = new Authentication();
+
+  String email = "";
+
+  String password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +58,20 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         new TextFormField(
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            setState(() {
+                              email = value;
+                            });
+                          },
                           decoration: new InputDecoration(),
                         ),
                         new TextFormField(
                           obscureText: true,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            setState(() {
+                              password = value;
+                            });
+                          },
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,14 +96,16 @@ class LoginPage extends StatelessWidget {
                               child: new RaisedButton(
                                 color: Colors.teal.shade900,
                                 onPressed: () async {
-                                    dynamic result =
-                                        await _authentication.SignInAnon();
-                                    if(result != null){
-                                      print("Signed In");
-                                      print(result.uid);
-                                    }else{
-                                      print("Error Signing in");
-                                    }
+                                  print(email);
+                                  print(password);
+                                  dynamic result =
+                                      await _authentication.SignInAnon();
+                                  if (result != null) {
+                                    print("Signed In");
+                                    print(result.uid);
+                                  } else {
+                                    print("Error Signing in");
+                                  }
                                 },
                                 child: new Text(
                                   "Log in",
@@ -97,7 +117,27 @@ class LoginPage extends StatelessWidget {
                               ),
                             ),
                           ],
-                        )
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            new Text("Not having an account ?",
+                                style: new TextStyle(
+                                    color: Colors.blueGrey.shade600,
+                                    fontSize: 15.0)),
+                            new InkWell(
+                              onTap: () {
+                                
+                              },
+                              child: new Text("Let's make it.",
+                                style: new TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.teal.shade900,
+                                  fontSize: 15.0
+                                )),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),

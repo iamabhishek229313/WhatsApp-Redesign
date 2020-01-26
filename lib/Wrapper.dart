@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:whatsapp_redesign/Screens/HomePage.dart';
 import 'package:whatsapp_redesign/Screens/Login/LoginPage.dart';
+import 'package:whatsapp_redesign/Screens/SignUp/Signup.dart';
 
 import 'Models/User.dart';
 
-class Wrapper extends StatelessWidget {
+class Wrapper extends StatefulWidget {
 
+  @override
+  _WrapperState createState() => _WrapperState();
+}
+
+class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context) ;
     print(user) ;
     if(user == null){
-      return LoginPage();
+      return SignupPage();
     }else{
       return HomePage();
     }
