@@ -18,7 +18,7 @@ class _WrapperState extends State<Wrapper> {
     final user = Provider.of<User>(context) ;
     print(user) ;
     if(user == null){
-      return SignupPage();
+      return LoginPage();
     }else{
       return HomePage();
     }

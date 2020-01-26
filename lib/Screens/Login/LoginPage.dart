@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:whatsapp_redesign/Screens/SignUp/Signup.dart';
 import 'package:whatsapp_redesign/Services/Authentication.dart';
@@ -49,6 +51,13 @@ class _LoginPageState extends State<LoginPage> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.height * 0.6,
                 decoration: new BoxDecoration(
+                    boxShadow: <BoxShadow>[
+                      new BoxShadow(
+                        color: Colors.teal.shade900,
+                        offset: new Offset(0.0, 5.0),
+                        blurRadius: 5.0
+                      )
+                    ],
                     borderRadius: BorderRadius.circular(5.0),
                     color: Colors.green.shade50),
                 child: Padding(
@@ -60,18 +69,31 @@ class _LoginPageState extends State<LoginPage> {
                         new TextFormField(
                           onChanged: (value) {
                             setState(() {
-                              email = value;
+                              email = value ; 
                             });
                           },
-                          decoration: new InputDecoration(),
+                          decoration: new InputDecoration(
+                              icon: Icon(Icons.alternate_email,color: Colors.teal.shade900,),
+                              labelText: "Email",
+                              hintText: 'example@gmail.com',
+                              border: new OutlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: Colors.teal.shade900))),
                         ),
                         new TextFormField(
                           obscureText: true,
                           onChanged: (value) {
                             setState(() {
-                              password = value;
+                              password = value ;
                             });
                           },
+                          decoration: new InputDecoration(
+                              icon: Icon(Icons.keyboard,color: Colors.teal.shade900,),
+                              labelText: "Password",
+                              hintText: 'First see there is no one around .',
+                              border: new OutlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: Colors.teal.shade900))),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,6 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                               width:
                                   MediaQuery.of(context).size.width / 2 * 0.7,
                               child: new RaisedButton(
+                                onPressed: () => exit(0),
                                 color: Colors.red,
                                 child: new Text(
                                   "Dismiss",
@@ -127,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                                     fontSize: 15.0)),
                             new InkWell(
                               onTap: () {
-                                
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()),);
                               },
                               child: new Text("Let's make it.",
                                 style: new TextStyle(

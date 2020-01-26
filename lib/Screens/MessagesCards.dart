@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_redesign/Models/message_model.dart';
 
 class MessagesCard extends StatelessWidget {
-  const MessagesCard({Key key}) : super(key: key);
-
+  final index ;
+  MessagesCard({@required this.index}) ;
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
       onTap: () {
-        
+        // To the the chats 
       },
       child: new Container(
         height: 90.0,
@@ -32,10 +33,15 @@ class MessagesCard extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10.0),
                   child: new ClipRRect(
                     borderRadius: BorderRadius.circular(35.0),
-                    child: new Container(
+                    // child: new Container(
+                    //   width: 70,
+                    //   height: 70,
+                    //   color: Colors.deepOrange,
+                    // ),
+                    child: new Image(
                       width: 70,
                       height: 70,
-                      color: Colors.deepOrange,
+                      image: AssetImage(chats[index].sender.imageUrl),
                     ),
                   ),
                 ),
@@ -54,7 +60,7 @@ class MessagesCard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 new Text(
-                                  "Abhishek Rai",
+                                  chats[index].sender.name,
                                   style: new TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black,
@@ -62,18 +68,22 @@ class MessagesCard extends StatelessWidget {
                                   ),
                                 ),
                                 new Container(
+                                  width: 75.0,
+                                  height: 20.0,
                                   margin: const EdgeInsets.only(right: 10.0),
                                   padding: const EdgeInsets.all(2.0),
                                   decoration: new BoxDecoration(
                                       borderRadius: BorderRadius.circular(2.0),
-                                      color: Colors.greenAccent.shade700),
-                                  child: new Text(
-                                    "4:30 PM",
-                                    style: new TextStyle(
-                                        fontSize: 12.0,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w200,
-                                        letterSpacing: 1.2),
+                                      color: Colors.greenAccent.shade100),
+                                  child: Center(
+                                    child: new Text(
+                                      chats[index].time,
+                                      style: new TextStyle(
+                                          fontSize: 12.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                          letterSpacing: 1.2),
+                                    ),
                                   ),
                                 )
                               ],
@@ -84,7 +94,7 @@ class MessagesCard extends StatelessWidget {
                             Container(
                               width: 250.0,
                               child: new Text(
-                                "Hello Dear ! Good evening , have a nice dinner ",
+                                chats[index].text,
                                 maxLines: 1,
                                 textWidthBasis: TextWidthBasis.longestLine,
                                 overflow: TextOverflow.ellipsis,

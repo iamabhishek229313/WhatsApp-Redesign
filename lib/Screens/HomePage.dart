@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:whatsapp_redesign/Models/message_model.dart';
 import 'package:whatsapp_redesign/Screens/MessagesCards.dart';
 import 'package:whatsapp_redesign/Services/Authentication.dart';
+
+
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -60,9 +62,9 @@ class _HomePageState extends State<HomePage> {
       body: new Container(
         padding: const EdgeInsets.all(8.0),
         child: new ListView.builder(
-          itemCount: 10,
+          itemCount: chats.length,
           itemBuilder: (context, index) {
-            return MessagesCard();
+            return MessagesCard(index: index,);
           },
         ),
       ),
