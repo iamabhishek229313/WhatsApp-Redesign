@@ -4,8 +4,6 @@ import 'package:whatsapp_redesign/Models/message_model.dart';
 import 'package:whatsapp_redesign/Screens/MessagesCards.dart';
 import 'package:whatsapp_redesign/Services/Authentication.dart';
 
-
-
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
 
@@ -14,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final Authentication _auth = new Authentication() ;
+  final Authentication _auth = new Authentication();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           ),
           new IconButton(
             onPressed: () async {
-             await _auth.signOut();
+              await _auth.signOut();
             },
             color: Colors.white,
             iconSize: 30.0,
@@ -64,9 +62,32 @@ class _HomePageState extends State<HomePage> {
         child: new ListView.builder(
           itemCount: chats.length,
           itemBuilder: (context, index) {
-            return MessagesCard(index: index,);
+            return MessagesCard(
+              index: index,
+            );
           },
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: new FloatingActionButton(
+        backgroundColor: Colors.teal.shade900,
+        onPressed: () {},
+        child: new Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      bottomNavigationBar: new BottomAppBar(
+        color: Colors.teal.shade900,
+        shape: CircularNotchedRectangle(),
+        child: Container(
+          height: 70,
+          child: new Row(
+            children: <Widget>[
+              
+            ],
+          ),
+        ) ,
       ),
     );
   }

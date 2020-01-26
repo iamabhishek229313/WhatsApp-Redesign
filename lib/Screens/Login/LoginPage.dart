@@ -11,10 +11,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   Authentication _authentication = new Authentication();
-
+  final _formKey = GlobalKey<FormState>();
   String email = "";
-
   String password = "";
+  String error = "";
 
   @override
   Widget build(BuildContext context) {
@@ -53,27 +53,32 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: new BoxDecoration(
                     boxShadow: <BoxShadow>[
                       new BoxShadow(
-                        color: Colors.teal.shade900,
-                        offset: new Offset(0.0, 5.0),
-                        blurRadius: 5.0
-                      )
+                          color: Colors.teal.shade900,
+                          offset: new Offset(0.0, 5.0),
+                          blurRadius: 5.0)
                     ],
                     borderRadius: BorderRadius.circular(5.0),
                     color: Colors.green.shade50),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: new Form(
+                    key: _formKey,
                     child: new Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         new TextFormField(
+                          validator: (value) =>
+                              value.isEmpty ? "Enter an email first" : null,
                           onChanged: (value) {
                             setState(() {
-                              email = value ; 
+                              email = value;
                             });
                           },
                           decoration: new InputDecoration(
-                              icon: Icon(Icons.alternate_email,color: Colors.teal.shade900,),
+                              icon: Icon(
+                                Icons.alternate_email,
+                                color: Colors.teal.shade900,
+                              ),
                               labelText: "Email",
                               hintText: 'example@gmail.com',
                               border: new OutlineInputBorder(
@@ -81,14 +86,20 @@ class _LoginPageState extends State<LoginPage> {
                                       color: Colors.teal.shade900))),
                         ),
                         new TextFormField(
+                          validator: (value) => value.length < 6
+                              ? "It should be of six characters"
+                              : null,
                           obscureText: true,
                           onChanged: (value) {
                             setState(() {
-                              password = value ;
+                              password = value;
                             });
                           },
                           decoration: new InputDecoration(
-                              icon: Icon(Icons.keyboard,color: Colors.teal.shade900,),
+                              icon: Icon(
+                                Icons.keyboard,
+                                color: Colors.teal.shade900,
+                              ),
                               labelText: "Password",
                               hintText: 'First see there is no one around .',
                               border: new OutlineInputBorder(
@@ -119,15 +130,18 @@ class _LoginPageState extends State<LoginPage> {
                               child: new RaisedButton(
                                 color: Colors.teal.shade900,
                                 onPressed: () async {
-                                  print(email);
-                                  print(password);
-                                  dynamic result =
-                                      await _authentication.SignInAnon();
-                                  if (result != null) {
-                                    print("Signed In");
-                                    print(result.uid);
-                                  } else {
-                                    print("Error Signing in");
+                                  dynamic result = await _authentication
+                                      .signInWithEmailAndPassword(
+                                          email, password);
+                                  if (result == null) {
+                                    setState(() {
+                                      if (error == '')
+                                        error = "No matching credentials found";
+                                      else
+                                        error = '';
+                                    });
+                                  }else{
+                                    // It get directly reach to the HomePage() as we have set a Stream at the Wrapper Class .
                                   }
                                 },
                                 child: new Text(
@@ -139,6 +153,13 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
+                            new Text(
+                              error,
+                              style: new TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.red.shade700,
+                              ),
+                            )
                           ],
                         ),
                         Row(
@@ -150,14 +171,17 @@ class _LoginPageState extends State<LoginPage> {
                                     fontSize: 15.0)),
                             new InkWell(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()),);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignupPage()),
+                                );
                               },
                               child: new Text("Let's make it.",
-                                style: new TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.teal.shade900,
-                                  fontSize: 15.0
-                                )),
+                                  style: new TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.teal.shade900,
+                                      fontSize: 15.0)),
                             )
                           ],
                         ),
